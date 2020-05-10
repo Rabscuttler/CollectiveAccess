@@ -1,8 +1,7 @@
-
 IMAGES := $(shell docker images -f "dangling=true" -q)
 CONTAINERS := $(shell docker ps -a -q -f status=exited)
 VOLUME := collectiveaccess-data
-NETWORK := oscari-net
+NETWORK := winton-net
 DB := c_access
 VERSION := latest
 
