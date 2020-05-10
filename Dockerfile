@@ -10,30 +10,30 @@ ENV APACHE_LOG_DIR      /var/log/apache2
 
 
 
-ENV TZ=Europe/Berlin\
- DEBIAN_FRONTEND=noninteractive
- 
+ENV TZ=Europe/London\
+	DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get install -y apache2 \
-					php7.0 \
-					libapache2-mod-php \
-					curl \
-					php-mysql \
-					mysql-client \
-					curl \
-					php-curl \
-					php-xml \
-					zip \
-					wget \
-					ffmpeg \
-					ghostscript \
-					imagemagick \
-					php-gd \
-					libreoffice \
-					php-zip \
-					vim \
-					
-					php-mbstring \
-					git
+	php7.0 \
+	libapache2-mod-php \
+	curl \
+	php-mysql \
+	mysql-client \
+	curl \
+	php-curl \
+	php-xml \
+	zip \
+	wget \
+	ffmpeg \
+	ghostscript \
+	imagemagick \
+	php-gd \
+	libreoffice \
+	php-zip \
+	vim \
+
+	php-mbstring \
+	git
 
 #GMAGICK
 RUN apt-get install -y php-pear php-dev graphicsmagick libgraphicsmagick1-dev php-gmagick
@@ -45,24 +45,24 @@ RUN wget https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.bionic
 ENV CA_PROVIDENCE_VERSION=1.7.8
 ENV CA_PROVIDENCE_DIR=/var/www/providence
 
-#ENV CA_PAWTUCKET_VERSION=1.7
-#ENV CA_PAWTUCKET_DIR=/var/www
+ENV CA_PAWTUCKET_VERSION=1.7
+ENV CA_PAWTUCKET_DIR=/var/www
 
 RUN curl -SsL https://github.com/collectiveaccess/providence/archive/$CA_PROVIDENCE_VERSION.tar.gz | tar -C /var/www/ -xzf -
 RUN mv /var/www/providence-$CA_PROVIDENCE_VERSION /var/www/providence
 RUN cd $CA_PROVIDENCE_DIR && cp setup.php-dist setup.php
 
-#RUN curl -SsL https://github.com/collectiveaccess/pawtucket2/archive/$CA_PAWTUCKET_VERSION.tar.gz | tar -C /var/www/ -xzf -
-#RUN mv $CA_PAWTUCKET_DIR/pawtucket2-$CA_PAWTUCKET_VERSION/* /var/www
-#RUN cd $CA_PAWTUCKET_DIR && cp setup.php-dist setup.php
+RUN curl -SsL https://github.com/collectiveaccess/pawtucket2/archive/$CA_PAWTUCKET_VERSION.tar.gz | tar -C /var/www/ -xzf -
+RUN mv $CA_PAWTUCKET_DIR/pawtucket2-$CA_PAWTUCKET_VERSION/* /var/www
+RUN cd $CA_PAWTUCKET_DIR && cp setup.php-dist setup.php
 
 RUN sed -i "s@DocumentRoot \/var\/www\/html@DocumentRoot \/var\/www@g" /etc/apache2/sites-available/000-default.conf
 RUN rm -rf /var/www/html
 run mkdir /$CA_PROVIDENCE_DIR/media/collectiveaccess
 run mkdir /$CA_PROVIDENCE_DIR/app/locale/fi_FI
-#RUN ln -s /$CA_PROVIDENCE_DIR/media /$CA_PAWTUCKET_DIR/media
+RUN ln -s /$CA_PROVIDENCE_DIR/media /$CA_PAWTUCKET_DIR/media
 
-#COPY php.ini /etc/php/7.0/cli/php.ini
+COPY php.ini /etc/php/7.0/cli/php.ini
 
 COPY files/php.ini /etc/php/7.0/apache2/php.ini
 COPY files/messages.po /$CA_PROVIDENCE_DIR/app/locale/fi_FI/

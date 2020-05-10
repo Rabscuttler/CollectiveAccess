@@ -55,7 +55,7 @@ if (!defined("__CA_DB_DATABASE__")) {
 # This value will be used on emails, on the login screen, in window titles, etc.
 #
 if (!defined("__CA_APP_DISPLAY_NAME__")) {
-	define("__CA_APP_DISPLAY_NAME__", "OSCARI");
+	define("__CA_APP_DISPLAY_NAME__", "WintonTrust");
 }
 
 
@@ -80,7 +80,7 @@ if (!defined("__CA_ADMIN_EMAIL__")) {
 # Set your preferred time zone here. The default is to use US Eastern Standard Time. 
 # A list of valid time zone settings is available at http://us3.php.net/manual/en/timezones.php
 #
-date_default_timezone_set('America/New_York');
+date_default_timezone_set('Europe/London');
 
 
 # --------------------------------------------------------------------------------------------
@@ -113,7 +113,7 @@ if (!defined("__CA_QUEUE_ENABLED__")) {
 # The default value is US/English, which exists in most configurations.
 # 
 if (!defined("__CA_DEFAULT_LOCALE__")) {
-	define("__CA_DEFAULT_LOCALE__", "fi_FI");
+	define("__CA_DEFAULT_LOCALE__", "en_GB");
 }
 
 

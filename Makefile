@@ -18,10 +18,10 @@ create_volume:
 
 create_db:
 	docker run --name mariadb \
-	--network $(NETWORK)
+	--network $(NETWORK) \
 	-v mariadb_ca:/var/lib/mysql \
  	-e MYSQL_ROOT_PASSWORD=root \
-	 -d mariadb:10.3.7
+	-d mariadb:10.3.7
 
 build:
 	docker build -t artturimatias/collectiveaccess:$(VERSION) .
